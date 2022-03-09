@@ -1,7 +1,7 @@
-import uuid
-
 from django.db import models
 from django.utils.translation import ugettext as _
+
+from apps.shortener.utils import generate_shortened_code
 
 
 class Shortener(models.Model):
@@ -22,15 +22,7 @@ class Shortener(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.shortened:
-            uid = uuid.uuid4()
-            code = uid.hex[:5]
-
-            while Shortener.objects.filter(shortened__exact=code).exists():
-                uid = uuid.uuid4()
-                code = uid.hex[5:10]
-
-            self.shortened = code
-
+            self.shortened = generate_shortened_code()
         super().save(*args, **kwargs)
 
 
@@ -64,11 +56,8 @@ class Log(models.Model):
         verbose_name = _('Log')
         verbose_name_plural = _('Logs')
 
-    def __str__(self):
-        return ''
+    # def save(self, *args, **kwargs):
+    #     self.shortener.clicks += 1
+    #     self.shortener.save()
 
-    def save(self, *args, **kwargs):
-        self.shortener.clicks += 1
-        self.shortener.save()
-
-        super().save(*args, **kwargs)
+    #     super().save(*args, **kwargs)
