@@ -5,7 +5,7 @@ from django.contrib.sessions.models import Session
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
 
-from shortener.models import Log, Shortener
+from apps.shortener.models import Log, Shortener
 
 admin.site.site_title = _('Shortener - Admin')
 admin.site.site_header = admin.site.site_title

@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from geoip2.errors import AddressNotFoundError  # type: ignore
 from user_agents import parse
 
-from shortener.models import Log, Shortener
+from apps.shortener.models import Log, Shortener
 
 
 def get_ip(request):
@@ -99,7 +99,3 @@ def get_shortend_and_redirect(request, shortened):
 
     else:
         raise Http404
-
-
-# def home(request):
-#     return redirect(settings.PORTAL_URL)

@@ -3,5 +3,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ShortenerConfig(AppConfig):
-    name = 'shortener'
+    name = 'apps.shortener'
     verbose_name = _('Shortener')

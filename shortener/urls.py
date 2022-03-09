@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from shortener.views import error_404, get_shortend_and_redirect  # , home
+from apps.shortener.views import error_404, get_shortend_and_redirect
 
 handler404 = error_404
 
@@ -12,5 +12,4 @@ urlpatterns = [
         get_shortend_and_redirect,
         name='get-shortend-and-redirect',
     ),
-    # path('', home, name='home'),
 ]
