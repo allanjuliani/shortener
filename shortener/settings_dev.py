@@ -8,3 +8,5 @@ DATABASES = {
         'NAME': BASE_DIR / 'dev.sqlite3',
     }
 }
+
+DOMAIN = 'http://localhost:8000/'

@@ -41,10 +41,10 @@ docker-clean:
 	@docker volume prune
 
 tests:
-	@docker exec -it django_shortener python -m pytest apps
+	@docker exec -it django_shortener python -m pytest -v apps
 
 cov:
-	@docker exec -it django_shortener python -m pytest apps --cov=apps
+	@docker exec -it django_shortener python -m pytest -v apps --cov=apps
 
 createsuperuser:
 	@docker exec -it django_shortener python manage.py createsuperuser --noinput --settings=shortener.settings_prod
