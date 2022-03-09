@@ -116,7 +116,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 # Self Domain
 
-DOMAIN = 'http://localhost/'
+DOMAIN = 'http://localhost:8000/'
 
 
 # GEO Path
