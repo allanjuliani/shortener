@@ -6,7 +6,9 @@ from django.utils.translation import ugettext as _
 
 class Shortener(models.Model):
     url = models.URLField(_('URL'), unique=True)
-    shortened = models.CharField(_('Shortened'), max_length=5, unique=True, blank=True)
+    shortened = models.CharField(
+        _('Shortened'), max_length=5, unique=True, blank=True
+    )
     clicks = models.IntegerField(_('Clicks'), default=0)
     date = models.DateTimeField(_('Date'), auto_now_add=True)
 
@@ -33,16 +35,28 @@ class Shortener(models.Model):
 
 
 class Log(models.Model):
-    shortener = models.ForeignKey(Shortener, verbose_name=_('Shortener'), on_delete=models.CASCADE)
+    shortener = models.ForeignKey(
+        Shortener, verbose_name=_('Shortener'), on_delete=models.CASCADE
+    )
     ip = models.GenericIPAddressField(_('IP'))
-    user_agent = models.CharField(_('User Agent'), max_length=512, null=True, blank=True)
-    browser = models.CharField(_('Browser'), max_length=50, null=True, blank=True)
+    user_agent = models.CharField(
+        _('User Agent'), max_length=512, null=True, blank=True
+    )
+    browser = models.CharField(
+        _('Browser'), max_length=50, null=True, blank=True
+    )
     os = models.CharField(_('OS'), max_length=50, null=True, blank=True)
-    latitude = models.CharField(_('Latitude'), max_length=8, null=True, blank=True)
-    longitude = models.CharField(_('Longitude'), max_length=8, null=True, blank=True)
+    latitude = models.CharField(
+        _('Latitude'), max_length=8, null=True, blank=True
+    )
+    longitude = models.CharField(
+        _('Longitude'), max_length=8, null=True, blank=True
+    )
     city = models.CharField(_('City'), max_length=100, null=True, blank=True)
     state = models.CharField(_('State'), max_length=50, null=True, blank=True)
-    country = models.CharField(_('Country'), max_length=50, null=True, blank=True)
+    country = models.CharField(
+        _('Country'), max_length=50, null=True, blank=True
+    )
     date = models.DateTimeField(_('Date'), auto_now_add=True)
 
     class Meta:

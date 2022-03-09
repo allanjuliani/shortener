@@ -1,25 +1,24 @@
-from django.conf import settings
+from django.contrib.gis.geoip2 import GeoIP2
 from django.http import Http404
 from django.shortcuts import redirect, render
+from geoip2.errors import AddressNotFoundError  # type: ignore
 from user_agents import parse
-from django.contrib.gis.geoip2 import GeoIP2
-from geoip2.errors import AddressNotFoundError
-from shortener.models import Shortener, Log
+
+from shortener.models import Log, Shortener
 
 
 def get_ip(request):
-    # try:
-    #     real_ip = request.META.get('HTTP_X_FORWARDED_FOR').split(', ')[0]
-    # except AttributeError:
-    #     real_ip = request.META.get('HTTP_X_REAL_IP')
-    # if not real_ip:
-    #     real_ip = request.META.get('REMOTE_ADDR')
+    try:
+        real_ip = request.META.get('HTTP_X_FORWARDED_FOR').split(', ')[0]
+    except AttributeError:
+        real_ip = request.META.get('HTTP_X_REAL_IP')
+    if not real_ip:
+        real_ip = request.META.get('REMOTE_ADDR')
 
-    # if real_ip == '127.0.0.1' or real_ip == '10.0.0.58':
-    #     real_ip = '201.6.116.151'
+    if real_ip == '127.0.0.1' or real_ip == '10.0.0.58':
+        real_ip = '201.6.116.151'
 
-    # return real_ip
-    return "179.174.41.29"
+    return real_ip
 
 
 def get_ip_info(ip):
@@ -53,7 +52,10 @@ def get_ip_info(ip):
 def get_browser_info(request):
     http_user_agent = request.META.get('HTTP_USER_AGENT', '')
     user_agent = parse(http_user_agent)
-    browser = '%s %s' % (user_agent.browser.family, user_agent.browser.version_string)
+    browser = '%s %s' % (
+        user_agent.browser.family,
+        user_agent.browser.version_string,
+    )
     os = '%s %s' % (user_agent.os.family, user_agent.os.version_string)
 
     context = {
@@ -63,7 +65,6 @@ def get_browser_info(request):
     }
 
     return context
-
 
 
 def error_404(request, exception=None):
