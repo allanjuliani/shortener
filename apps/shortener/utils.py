@@ -48,7 +48,6 @@ def get_ip_info(request):
     }
 
     try:
-        # __import__('ipdb').set_trace()
         locale = GeoIP2().city(ip)
         context = {
             'latitude': str(locale.get('latitude'))[:8],
