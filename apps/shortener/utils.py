@@ -1,19 +1,24 @@
-import uuid
+import random
+import string
 
 from django.contrib.gis.geoip2 import GeoIP2
+from django.contrib.gis.geoip2.base import GeoIP2Exception
 from geoip2.errors import AddressNotFoundError  # type: ignore
 from user_agents import parse
+
+
+def random_generator():
+    letters = string.ascii_uppercase
+    return ''.join(random.choice(letters) for i in range(5))
 
 
 def generate_shortened_code():
     from apps.shortener.models import Shortener
 
-    uid = uuid.uuid4()
-    code = uid.hex[:5]
+    code = random_generator()
 
     while Shortener.objects.filter(shortened__exact=code).exists():
-        uid = uuid.uuid4()
-        code = uid.hex[5:10]
+        code = random_generator()
 
     return code
 
@@ -43,13 +48,8 @@ def get_ip_info(request):
     }
 
     try:
-        geo = GeoIP2()
-        locale = geo.city(ip)
-
-    except AddressNotFoundError:
-        pass
-
-    else:
+        # __import__('ipdb').set_trace()
+        locale = GeoIP2().city(ip)
         context = {
             'latitude': str(locale.get('latitude'))[:8],
             'longitude': str(locale.get('longitude'))[:8],
@@ -57,6 +57,9 @@ def get_ip_info(request):
             'state': locale.get('region'),
             'country': locale.get('country_name'),
         }
+
+    except (AddressNotFoundError, GeoIP2Exception):
+        pass
 
     return context
 

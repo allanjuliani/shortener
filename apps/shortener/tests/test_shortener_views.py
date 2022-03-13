@@ -9,11 +9,11 @@ from ..views import RedirectToShortenedView
 class TestShortenerViews(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        Shortener.objects.create(shortened='GOURL', url='http://localhost')
+        Shortener.objects.create(shortened='SHORT', url='http://localhost')
 
     def test_redirect_to_shortened_code(self):
-        request = self.factory.get('GOURL')
-        kwargs = {'code': 'GOURL'}
+        request = self.factory.get('SHORT')
+        kwargs = {'code': 'SHORT'}
         response = RedirectToShortenedView.as_view()(request, **kwargs)
         self.assertEqual(response.status_code, 302)
 
