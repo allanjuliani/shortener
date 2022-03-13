@@ -1,4 +1,4 @@
-# Django shortener
+# URL Shortener
 
 ## Using Docker
 
