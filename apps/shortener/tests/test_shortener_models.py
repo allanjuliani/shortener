@@ -16,7 +16,7 @@ class TestShortenerModels(TestCase):
 
     def test_random_shortened_str(self):
         with mock.patch(
-            'apps.shortener.models.generate_shortened_code',
+            'apps.shortener.utils.generate_shortened_code',
             return_value='VALUE',
         ):
             shortener = self.model.objects.create(
