@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpRequest
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
@@ -6,7 +6,7 @@ from .utils import add_new_click, create_access_log, get_shortener
 
 
 class RedirectToShortenedView(TemplateView):
-    def get(self, request, code):
+    def get(self, request: HttpRequest, code: str):
         shortener = get_shortener(code)
 
         if shortener:
