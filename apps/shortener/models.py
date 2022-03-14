@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.shortener.utils import generate_shortened_code
-
 
 class Shortener(models.Model):
     url = models.URLField(_('URL'), unique=True)
@@ -21,6 +19,8 @@ class Shortener(models.Model):
         return self.shortened
 
     def save(self, *args, **kwargs):
+        from apps.shortener.utils import generate_shortened_code
+
         if not self.shortened:
             self.shortened = generate_shortened_code()
         super().save(*args, **kwargs)
