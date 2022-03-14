@@ -8,7 +8,7 @@ from django.http import HttpRequest
 from geoip2.errors import AddressNotFoundError  # type: ignore
 from user_agents import parse
 
-from apps.shortener.models import Shortener
+from .models import Shortener
 
 
 def add_new_click(shortener: Shortener) -> None:

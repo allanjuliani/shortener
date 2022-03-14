@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from apps.shortener.models import Log, Shortener
+from .models import Log, Shortener
 
 admin.site.site_title = _('Shortener - Admin')
 admin.site.site_header = admin.site.site_title
