@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     'id',
-                    models.AutoField(
+                    models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
@@ -36,9 +36,15 @@ class Migration(migrations.Migration):
                     models.IntegerField(default=0, verbose_name='Clicks'),
                 ),
                 (
-                    'date',
+                    'created_at',
                     models.DateTimeField(
-                        auto_now_add=True, verbose_name='Date'
+                        auto_now_add=True, verbose_name='Created at'
+                    ),
+                ),
+                (
+                    'updated_at',
+                    models.DateTimeField(
+                        auto_now=True, verbose_name='Updated at'
                     ),
                 ),
             ],
@@ -53,7 +59,7 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     'id',
-                    models.AutoField(
+                    models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
@@ -131,9 +137,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    'date',
+                    'created_at',
                     models.DateTimeField(
-                        auto_now_add=True, verbose_name='Date'
+                        auto_now_add=True, verbose_name='Created at'
                     ),
                 ),
                 (

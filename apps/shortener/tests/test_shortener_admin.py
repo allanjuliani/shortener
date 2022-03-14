@@ -39,7 +39,14 @@ class TestShortenerAdmin(TestCase):
             self.shortenerAdmin.get_readonly_fields(
                 self=None, request=None, obj=self.shortener
             ),
-            ['id', 'url', 'shortened_link', 'clicks_link', 'date'],
+            [
+                'id',
+                'url',
+                'shortened_link',
+                'clicks_link',
+                'created_at',
+                'updated_at',
+            ],
         )
 
     def test_get_fields(self):
@@ -51,7 +58,14 @@ class TestShortenerAdmin(TestCase):
             self.shortenerAdmin.get_fields(
                 self=None, request=None, obj=self.shortener
             ),
-            ['id', 'url', 'shortened_link', 'clicks_link', 'date'],
+            [
+                'id',
+                'url',
+                'shortened_link',
+                'clicks_link',
+                'created_at',
+                'updated_at',
+            ],
         )
 
     def test_shortened_link(self):

@@ -57,14 +57,28 @@ class ShortenerAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         return (
-            ['id', 'url', 'shortened_link', 'clicks_link', 'date']
+            [
+                'id',
+                'url',
+                'shortened_link',
+                'clicks_link',
+                'created_at',
+                'updated_at',
+            ]
             if obj
             else []
         )
 
     def get_fields(self, request, obj=None):
         return (
-            ['id', 'url', 'shortened_link', 'clicks_link', 'date']
+            [
+                'id',
+                'url',
+                'shortened_link',
+                'clicks_link',
+                'created_at',
+                'updated_at',
+            ]
             if obj
             else ['url', 'shortened']
         )
@@ -91,8 +105,16 @@ class ShortenerAdmin(admin.ModelAdmin):
     clicks_link.short_description = _('Clicks')  # type: ignore
     clicks_link.admin_order_field = 'clicks'  # type: ignore
 
-    list_display = ('id', 'url', 'shortened_link', 'clicks_link', 'date')
+    list_display = (
+        'id',
+        'url',
+        'shortened_link',
+        'clicks_link',
+        'created_at',
+        'updated_at',
+    )
     list_display_links = None
+    list_filter = ('created_at', 'updated_at')
     list_per_page = 20
     actions = None
 
@@ -140,7 +162,7 @@ class LogAdmin(admin.ModelAdmin):
         'user_agent',
         'browser',
         'os',
-        'date',
+        'created_at',
     )
     list_display_links = None
     list_per_page = 10

@@ -12,7 +12,8 @@ from .models import Shortener
 
 
 def add_new_click(shortener: Shortener) -> None:
-    Shortener.objects.update(clicks=shortener.clicks + 1)
+    shortener.clicks = shortener.clicks + 1
+    shortener.save()
 
 
 def random_generator() -> str:

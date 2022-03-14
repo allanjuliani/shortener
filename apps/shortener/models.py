@@ -8,7 +8,8 @@ class Shortener(models.Model):
         _('Shortened'), max_length=5, unique=True, blank=True
     )
     clicks = models.IntegerField(_('Clicks'), default=0)
-    date = models.DateTimeField(_('Date'), auto_now_add=True)
+    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
 
     class Meta:
         db_table = 'shortener'
@@ -49,15 +50,9 @@ class Log(models.Model):
     country = models.CharField(
         _('Country'), max_length=50, null=True, blank=True
     )
-    date = models.DateTimeField(_('Date'), auto_now_add=True)
+    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
 
     class Meta:
         db_table = 'shortener_log'
         verbose_name = _('Log')
         verbose_name_plural = _('Logs')
-
-    # def save(self, *args, **kwargs):
-    #     self.shortener.clicks += 1
-    #     self.shortener.save()
-
-    #     super().save(*args, **kwargs)
