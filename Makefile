@@ -40,7 +40,7 @@ docker-clean:
 	@docker system prune -a
 	@docker volume prune
 
-tests:
+test:
 	@docker exec -it django_shortener python -m pytest -v apps
 
 cov:
@@ -48,9 +48,6 @@ cov:
 
 createsuperuser:
 	@docker exec -it django_shortener python manage.py createsuperuser --noinput --settings=shortener.settings_prod
-
-createtoken:
-	@docker exec -it django_shortener python manage.py drf_create_token $(username)
 
 shell-django:
 	@docker exec -it django_shortener /bin/bash
