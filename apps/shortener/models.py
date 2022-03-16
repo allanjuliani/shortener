@@ -27,7 +27,7 @@ class Shortener(models.Model):
         super().save(*args, **kwargs)
 
 
-class Log(models.Model):
+class Click(models.Model):
     shortener = models.ForeignKey(
         Shortener, verbose_name=_('Shortener'), on_delete=models.CASCADE
     )
@@ -53,6 +53,6 @@ class Log(models.Model):
     created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
 
     class Meta:
-        db_table = 'shortener_log'
-        verbose_name = _('Log')
-        verbose_name_plural = _('Logs')
+        db_table = 'shortener_click'
+        verbose_name = _('Click')
+        verbose_name_plural = _('Clicks')

@@ -38,9 +38,6 @@ def get_ip(request: HttpRequest) -> str:
     if not real_ip:
         real_ip = request.META.get('REMOTE_ADDR')
 
-    if real_ip == '127.0.0.1':
-        real_ip = '201.6.116.151'
-
     return real_ip
 
 
@@ -92,11 +89,11 @@ def get_browser_info(request: HttpRequest) -> dict:
 
 
 def create_access_log(request: HttpRequest, shortener: Shortener) -> None:
-    from apps.shortener.models import Log
+    from apps.shortener.models import Click
 
     ip_info = get_ip_info(request)
     browser_info = get_browser_info(request)
-    Log.objects.create(
+    Click.objects.create(
         shortener_id=shortener.id,
         ip=get_ip(request),
         latitude=ip_info.get('latitude'),

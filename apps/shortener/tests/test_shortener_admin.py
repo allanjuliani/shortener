@@ -1,18 +1,18 @@
 from django.conf import settings
 from django.test import TestCase
 
-from apps.shortener.admin import LogAdmin, ShortenerAdmin
-from apps.shortener.models import Log, Shortener
+from apps.shortener.admin import ClickAdmin, ShortenerAdmin
+from apps.shortener.models import Click, Shortener
 
 
 class TestShortenerAdmin(TestCase):
     def setUp(self):
         self.shortenerAdmin = ShortenerAdmin
-        self.logAdmin = LogAdmin
+        self.clickAdmin = ClickAdmin
         self.shortener = Shortener.objects.create(
             url='http://localhost', shortened='SHORT'
         )
-        self.log = Log.objects.create(
+        self.click = Click.objects.create(
             shortener=self.shortener, ip='127.0.0.1', latitude=1, longitude=1
         )
 
@@ -78,12 +78,12 @@ class TestShortenerAdmin(TestCase):
     def test_clicks_link(self):
         self.assertEqual(
             self.shortenerAdmin.clicks_link(self=None, obj=self.shortener),
-            '<a href="/admin/shortener/log/?shortener__id__exact=1">0</a>',
+            '<a href="/admin/shortener/click/?shortener__id__exact=1">0</a>',
         )
 
     def test_google_maps(self):
         self.assertEqual(
-            self.logAdmin.google_maps(self=None, obj=self.log),
+            self.clickAdmin.google_maps(self=None, obj=self.click),
             '<iframe class="map" width="240" height="180" '
             'frameborder="0" scrolling="no" marginheight="0" '
             'marginwidth="0" '
@@ -93,6 +93,6 @@ class TestShortenerAdmin(TestCase):
 
     def test_view_shortener(self):
         self.assertEqual(
-            self.logAdmin.view_shortener(self=None, obj=self.log),
+            self.clickAdmin.view_shortener(self=None, obj=self.click),
             '<a href="/admin/shortener/shortener/1/change/">SHORT</a>',
         )

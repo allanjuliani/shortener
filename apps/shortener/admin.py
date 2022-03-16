@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from .models import Log, Shortener
+from .models import Click, Shortener
 
 admin.site.site_title = _('Shortener - Admin')
 admin.site.site_header = admin.site.site_title
@@ -46,7 +46,7 @@ class SessionAdmin(admin.ModelAdmin):
     actions = None
     list_display = ('session_key', 'expire_date', 'session_data')
     list_display_links = None
-    list_per_page = 500
+    list_per_page = 10
     readonly_fields = ('session_key', 'expire_date', 'session_data')
 
 
@@ -97,7 +97,7 @@ class ShortenerAdmin(admin.ModelAdmin):
     def clicks_link(self, obj):
         return format_html(
             '<a href="{url}?shortener__id__exact={id}">{clicks}</a>',
-            url=reverse('admin:shortener_log_changelist'),
+            url=reverse('admin:shortener_click_changelist'),
             id=obj.id,
             clicks=obj.clicks,
         )
@@ -119,8 +119,8 @@ class ShortenerAdmin(admin.ModelAdmin):
     actions = None
 
 
-@admin.register(Log)
-class LogAdmin(admin.ModelAdmin):
+@admin.register(Click)
+class ClickAdmin(admin.ModelAdmin):
     def google_maps(self, obj):
         return format_html(
             '<iframe class="map" width="240" height="180" '

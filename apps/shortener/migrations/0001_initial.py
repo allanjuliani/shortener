@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Log',
+            name='Click',
             fields=[
                 (
                     'id',
@@ -152,9 +152,9 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                'verbose_name': 'Log',
-                'verbose_name_plural': 'Logs',
-                'db_table': 'shortener_log',
+                'verbose_name': 'Click',
+                'verbose_name_plural': 'Clicks',
+                'db_table': 'shortener_click',
             },
         ),
     ]
