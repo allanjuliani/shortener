@@ -1,0 +1,17 @@
+name: Build Docker
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  building:
+    name: Building Docker
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Build the stack
+        run: make install
