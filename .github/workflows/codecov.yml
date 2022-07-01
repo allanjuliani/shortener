@@ -1,0 +1,61 @@
+name: Workflow for Codecov
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+
+env:
+  MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+  MYSQL_NAME: ${{ secrets.MYSQL_NAME }}
+  MYSQL_USER: ${{ secrets.MYSQL_USER }}
+  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+
+jobs:
+  building:
+
+    runs-on: ubuntu-20.04
+    env:
+      SECRET_KEY: workflow
+    steps:
+    - name: Check Out Repo
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: |
+        sudo apt-get install git build-essential python3-virtualenv libxml2-dev libxslt1-dev libevent-dev python3-dev libsasl2-dev libmysqlclient-dev libjpeg-dev libffi-dev libssl-dev -y
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+    - name: Create the Virtualenv
+      run: |
+        virtualenv .venv
+    - name: Activate Virtualenv
+      run: |
+        source .venv/bin/activate
+    - name: Install Python Dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Export env variables
+      run: |
+        export $(cat .env.example | xargs)
+    - name: Install Database
+      run: |
+        ./manage.py migrate --settings=shortener.settings_dev
+    - name: Test the application
+      run: |
+        pytest -v apps/
+    - name: Show coverage
+      run: |
+        pytest -v apps/ --cov=apps/
+
+    - name: Generate coverage report
+      run: |
+        pytest --cov=apps/ --cov-report=xml --ds=shortener.settings_test
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        verbose: true
