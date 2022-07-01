@@ -1,5 +1,7 @@
 # URL Shortener
 
+[![codecov](https://codecov.io/gh/allanjuliani/shortener/branch/main/graph/badge.svg?token=z6xvRrXL5n)](https://codecov.io/gh/allanjuliani/shortener)
+
 ## 🐋 Using Docker
 
 ### Install Docker
