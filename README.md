@@ -2,9 +2,7 @@
 
 [![codecov](https://codecov.io/gh/allanjuliani/shortener/branch/main/graph/badge.svg?token=z6xvRrXL5n)](https://codecov.io/gh/allanjuliani/shortener)
 
-## 🐋 Using Docker
-
-### Install Docker
+### 🐋 Install Docker
 
 https://docs.docker.com/engine/install/
 
@@ -31,5 +29,5 @@ This command will create a user based on environment var defined at .env file
 make createsuperuser
 ```
 
-#### Admin URL to access on browser
+#### 🔗 Admin URL to access on browser
 http://localhost/admin/
