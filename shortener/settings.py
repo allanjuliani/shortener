@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.darktheme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
