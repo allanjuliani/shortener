@@ -15,7 +15,7 @@ make install
 
 ### 🧪 Run tests
 ```commandline
-make tests
+make test
 ```
 
 ### 🔍 Show coverage
