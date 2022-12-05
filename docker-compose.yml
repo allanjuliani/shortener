@@ -18,7 +18,7 @@ services:
       retries: 15
   # https://hub.docker.com/_/nginx
   nginx:
-    image: nginx:1.22
+    image: nginx:1.23.2
     container_name: nginx_shortener
     ports:
       - "80:80"
