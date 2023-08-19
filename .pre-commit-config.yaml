@@ -19,18 +19,19 @@ repos:
     -   id: mixed-line-ending
     -   id: trailing-whitespace
 -   repo: https://github.com/timothycrosley/isort
-    rev: 5.10.1
+    rev: 5.11.5
     hooks:
     -   id: isort
 -   repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
     -   id: flake8
+        exclude: ^(.venv/|migrations/|wishlist/|apps/product/migrations/)
 -   repo: https://github.com/psf/black
-    rev: 22.10.0
+    rev: 23.7.0
     hooks:
     -   id: black
-        exclude: ^(venv/|migrations/)
+        exclude: ^(.venv/|migrations/|wishlist/|apps/product/migrations/)
         language: python
         language_version: python3
         args: [
@@ -38,7 +39,7 @@ repos:
                 --line-length=79
         ]
 -   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.961
+    rev: v1.5.1
     hooks:
     -   id: mypy
-        exclude: apps/shortener/migrations/
+        exclude: ^(.venv/|migrations/|wishlist/|apps/product/migrations/)
