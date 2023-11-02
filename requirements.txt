@@ -1,4 +1,4 @@
-Django==4.2.4
+Django==4.2.7
 geoip2==4.7.0
 gunicorn==21.2.0
 mysqlclient==2.2.0
